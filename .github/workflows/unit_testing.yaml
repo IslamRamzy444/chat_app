@@ -1,0 +1,22 @@
+name: Unit Testing Check
+on:
+  pull_request:
+    types: [opened, synchronize, edited]
+
+jobs:
+  unit-testing-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.41.6
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Run generator
+        run: flutter pub run build_runner build  
+      - name: Run test
+        run: flutter test test
