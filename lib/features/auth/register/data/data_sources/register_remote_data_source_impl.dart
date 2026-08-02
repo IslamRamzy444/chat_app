@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as: RegisterRemoteDataSourceContract)
 class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSourceContract{
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth;
+  RegisterRemoteDataSourceImpl(this._auth);
 
   @override
   Future<BaseResponse<RegisterEntity>> registerWithEmailAndPassword(String email, String name, String password) async{
@@ -19,7 +20,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSourceContract{
         email: user.email ?? email,
         name: user.displayName ?? name,
       );
-      return SuccessResonse<RegisterEntity>(data: entity);
+      return SuccessResponse<RegisterEntity>(data: entity);
     }on FirebaseAuthException catch(e){
       return ErrorResponse<RegisterEntity>(error: Exception(e.message ?? 'Registeration Failed'));
     }catch(e){

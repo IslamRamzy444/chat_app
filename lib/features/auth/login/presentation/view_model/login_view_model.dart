@@ -28,7 +28,7 @@ class LoginViewModel extends Cubit<LoginStates>{
     final res=await _loginUseCase.call(email, password);
     switch(res){
       
-      case SuccessResonse<LoginEntity>():
+      case SuccessResponse<LoginEntity>():
         emit(state.copyWith(
           loginUserState: BaseState<LoginEntity>(
             isLoading: false,

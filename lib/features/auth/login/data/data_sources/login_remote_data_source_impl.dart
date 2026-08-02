@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 @Injectable(as: LoginRemoteDataSourceContract)
 class LoginRemoteDataSourceImpl implements LoginRemoteDataSourceContract{
-  final FirebaseAuth _auth=FirebaseAuth.instance;
+  final FirebaseAuth _auth;
+  LoginRemoteDataSourceImpl(this._auth);
   @override
   Future<BaseResponse<LoginEntity>> loginWithEmailAndPassword(String email, String password) async{
    try{
@@ -16,7 +17,7 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSourceContract{
       email: user.email??email,
       name: user.displayName
     );
-    return SuccessResonse<LoginEntity>(data: entity);
+    return SuccessResponse<LoginEntity>(data: entity);
    }on FirebaseAuthException catch(e){
     return ErrorResponse<LoginEntity>(error: Exception(e.message));
    }catch(e){

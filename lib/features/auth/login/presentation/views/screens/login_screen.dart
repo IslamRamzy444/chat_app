@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
-                            return AppValidators.validateEmail(value);
+                            return AppValidators.validateEmail(value,context);
                           },
                         ),
                         SizedBox(height: 0.02*height,),
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
-                            return AppValidators.validatePassword(value);
+                            return AppValidators.validatePassword(value,context);
                           },
                         ),
                         SizedBox(height: 0.03*height,),
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 message: AppLocalizations.of(context)!.user_sign_in_success,
                 posActionName: AppLocalizations.of(context)!.ok,
                 posAction: () {
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, AppRoutes.home);
                 },
               );

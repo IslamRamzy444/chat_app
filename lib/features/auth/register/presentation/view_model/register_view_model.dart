@@ -28,7 +28,7 @@ class RegisterViewModel extends Cubit<RegisterStates>{
     final res=await _registerUseCase.call(email, name, password);
     switch(res){
       
-      case SuccessResonse<RegisterEntity>():
+      case SuccessResponse<RegisterEntity>():
         emit(state.copyWith(
           registerState: BaseState<RegisterEntity>(
             isLoading: false,

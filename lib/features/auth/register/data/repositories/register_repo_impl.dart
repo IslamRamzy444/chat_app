@@ -12,8 +12,8 @@ class RegisterRepoImpl implements RegisterRepoContract{
     final response=await _dataSourceContract.registerWithEmailAndPassword(email, name, password);
     switch(response){
       
-      case SuccessResonse<RegisterEntity>():
-        return SuccessResonse<RegisterEntity>(data: response.data);
+      case SuccessResponse<RegisterEntity>():
+        return SuccessResponse<RegisterEntity>(data: response.data);
       case ErrorResponse<RegisterEntity>():
         return ErrorResponse<RegisterEntity>(error: response.error);
     }

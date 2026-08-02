@@ -1,7 +1,7 @@
 sealed class BaseResponse<T> {}
-class SuccessResonse<T> extends BaseResponse<T>{
+class SuccessResponse<T> extends BaseResponse<T>{
   final T data;
-  SuccessResonse({required this.data});
+  SuccessResponse({required this.data});
 }
 class ErrorResponse<T> extends BaseResponse<T>{
   final Exception error;

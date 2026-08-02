@@ -12,8 +12,8 @@ class LoginRepoImpl implements LoginRepoContract{
     final response=await _contract.loginWithEmailAndPassword(email, password);
     switch(response){
       
-      case SuccessResonse<LoginEntity>():
-        return SuccessResonse<LoginEntity>(data: response.data);
+      case SuccessResponse<LoginEntity>():
+        return SuccessResponse<LoginEntity>(data: response.data);
       case ErrorResponse<LoginEntity>():
         return ErrorResponse<LoginEntity>(error: response.error);
     }

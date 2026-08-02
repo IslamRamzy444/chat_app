@@ -59,7 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              return AppValidators.validateUserName(value);
+                              return AppValidators.validateUserName(value,context);
                             },
                           ),
                           SizedBox(height: 0.02*height,),
@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              return AppValidators.validateEmail(value);
+                              return AppValidators.validateEmail(value,context);
                             },
                           ),
                           SizedBox(height: 0.02*height,),
@@ -90,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              return AppValidators.validatePassword(value);
+                              return AppValidators.validatePassword(value,context);
                             },
                           ),
                           SizedBox(height: 0.02*height,),
@@ -102,14 +102,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               prefixIcon: Icon(Icons.lock,color: AppColors.greyColor,),
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  viewModel.doIntent(TogglePasswordVisibilityEvent());
+                                  viewModel.doIntent(ToggleConfirmPasswordVisibilityEvent());
                                 }, 
                                 icon: state.isConfirmPasswordHidden!?Icon(Icons.visibility_off_outlined,color: AppColors.greyColor,):Icon(Icons.visibility_outlined,color: AppColors.greyColor,)
                               )
                             ),
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              return AppValidators.validateConfirmPassword(value,passwordController.text);
+                              return AppValidators.validateConfirmPassword(value,passwordController.text,context);
                             },
                           ),
                           SizedBox(height: 0.03*height,),
@@ -160,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 message: AppLocalizations.of(context)!.user_sign_up_success,
                 posActionName: AppLocalizations.of(context)!.ok,
                 posAction: () {
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, AppRoutes.home);
                 },
               );
