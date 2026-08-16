@@ -1,6 +1,7 @@
 import 'package:chat_app/config/base_response/base_response.dart';
 import 'package:chat_app/features/auth/register/data/data_sources/register_remote_data_source_impl.dart';
 import 'package:chat_app/features/auth/register/domain/entities/register_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -8,12 +9,22 @@ import 'package:test/test.dart';
 
 import 'register_remote_data_source_impl_test.mocks.dart';
 
-@GenerateMocks([FirebaseAuth, UserCredential, User])
+@GenerateMocks([
+  FirebaseAuth,
+  UserCredential,
+  User,
+  FirebaseFirestore,
+  DocumentReference,
+  CollectionReference,
+])
 void main() {
   late RegisterRemoteDataSourceImpl dataSource;
   late MockFirebaseAuth mockFirebaseAuth;
   late MockUserCredential mockUserCredential;
   late MockUser mockUser;
+  late MockFirebaseFirestore mockFirebaseFirestore;
+  late MockDocumentReference<Map<String, dynamic>> mockDocumentReference;
+  late MockCollectionReference<Map<String, dynamic>> mockCollectionReference;
   const testEmail = 'test@example.com';
   const testPassword = 'password123';
   const testName = 'Test User';
@@ -24,7 +35,13 @@ void main() {
     mockFirebaseAuth = MockFirebaseAuth();
     mockUser = MockUser();
     mockUserCredential = MockUserCredential();
-    dataSource = RegisterRemoteDataSourceImpl(mockFirebaseAuth);
+    mockFirebaseFirestore = MockFirebaseFirestore();
+    mockDocumentReference = MockDocumentReference<Map<String, dynamic>>();
+    mockCollectionReference = MockCollectionReference<Map<String, dynamic>>();
+    dataSource = RegisterRemoteDataSourceImpl(
+      mockFirebaseAuth,
+      mockFirebaseFirestore,
+    );
   });
 
   group('register remote data source impl test cases', () {
@@ -40,6 +57,15 @@ void main() {
       when(mockUser.uid).thenReturn(testUid);
       when(mockUser.email).thenReturn(testEmail);
       when(mockUser.displayName).thenReturn(testDisplayName);
+      when(
+        mockFirebaseFirestore.collection('users'),
+      ).thenReturn(mockCollectionReference);
+      when(
+        mockCollectionReference.doc(testUid),
+      ).thenReturn(mockDocumentReference);
+      when(
+        mockDocumentReference.set(any),
+      ).thenAnswer((_) async => Future.value());
       final result = await dataSource.registerWithEmailAndPassword(
         testEmail,
         testName,
