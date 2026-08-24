@@ -101,6 +101,11 @@ class AppTheme {
         borderSide: BorderSide(color: AppColors.redColor,width: 1.5)
       ),
       errorStyle: GoogleFonts.sora(color: AppColors.redColor,fontSize: 13),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryColor,
+      foregroundColor: AppColors.whiteColor,
+      shape: CircleBorder()
     )
   );
 }
