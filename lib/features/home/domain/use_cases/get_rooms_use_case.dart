@@ -5,8 +5,10 @@ import 'package:injectable/injectable.dart';
 @injectable
 class GetRoomsUseCase {
   final RoomsRepoContract _repoContract;
+
   GetRoomsUseCase(this._repoContract);
-  Future<BaseResponse<List<RoomEntity>>> call(String userId) async{
-    return _repoContract.getRooms(userId);
+
+  Future<BaseResponse<List<RoomEntity>>> call() async {
+    return _repoContract.getRooms();
   }
 }
