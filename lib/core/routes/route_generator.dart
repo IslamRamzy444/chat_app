@@ -1,6 +1,7 @@
 import 'package:chat_app/core/routes/app_routes.dart';
 import 'package:chat_app/features/auth/login/presentation/views/screens/login_screen.dart';
 import 'package:chat_app/features/auth/register/presentation/views/screens/register_screen.dart';
+import 'package:chat_app/features/chat/presentation/views/screens/chat_screen.dart';
 import 'package:chat_app/features/home/presentation/views/screens/create_room_screen.dart';
 import 'package:chat_app/features/home/presentation/views/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const HomeScreen(),);
       case AppRoutes.createRoom:
         return MaterialPageRoute(builder: (context) => const CreateRoomScreen(),);
+      case AppRoutes.chat:
+        return MaterialPageRoute(builder: (context) => const ChatScreen(),settings: settings);  
        default:
         return unDefinedRoute();
     }
