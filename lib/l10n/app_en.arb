@@ -43,5 +43,8 @@
     "description_start_with_letter":"The room description must start with a letter",
     "select_category":"Select a category",
     "category_selection_required":"You must select a category",
-    "room_success":"Room Created Successfully"
+    "room_success":"Room Created Successfully",
+    "no_messages":"No messages sent yet",
+    "type_message":"Type message",
+    "send":"Send"
 }
